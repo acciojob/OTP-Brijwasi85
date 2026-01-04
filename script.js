@@ -1,27 +1,26 @@
-//your JS code here. If required.
-const codes = document.querySelectorAll('.code');
+const inputs = document.querySelectorAll(".code");
 
-codes[0].focus();
+// Auto focus first input
+inputs[0].focus();
 
-codes.forEach((code, idx) => {
-    code.addEventListener('keydown', (e) => {
+inputs.forEach((input, index) => {
 
-        if (e.key >= '0' && e.key <= '9') {
-            code.value = '';
-            setTimeout(() => {
-                if (codes[idx + 1]) {
-                    codes[idx + 1].focus();
-                }
-            }, 10);
-        }
+    input.addEventListener("input", () => {
+        // Allow only single digit
+        input.value = input.value.replace(/[^0-9]/g, "");
 
-        if (e.key === 'Backspace') {
-            code.value = '';
-            setTimeout(() => {
-                if (codes[idx - 1]) {
-                    codes[idx - 1].focus();
-                }
-            }, 10);
+        // Move to next input if value entered
+        if (input.value && index < inputs.length - 1) {
+            inputs[index + 1].focus();
         }
     });
+
+    input.addEventListener("keydown", (e) => {
+        if (e.key === "Backspace") {
+            if (input.value === "" && index > 0) {
+                inputs[index - 1].focus();
+            }
+        }
+    });
+
 });
