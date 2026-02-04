@@ -1,26 +1,29 @@
-const inputs = document.querySelectorAll(".code");
 
-// Auto focus first input
-inputs[0].focus();
+const otp = document.querySelectorAll(".code");
+// console.log(otp);
+// console.log(otp[0]);
+// console.dir(otp[0]);
+otp[0].focus();
 
-inputs.forEach((input, index) => {
-
-    input.addEventListener("input", () => {
-        // Allow only single digit
-        input.value = input.value.replace(/[^0-9]/g, "");
-
-        // Move to next input if value entered
-        if (input.value && index < inputs.length - 1) {
-            inputs[index + 1].focus();
+otp.forEach((num, index) => {
+    // console.log(num, index);
+    num.addEventListener("input", (event) => {
+        // console.dir(event.target);
+        console.log(event.target.value);
+        if(event.target.value.length === 1 && index < otp.length - 1) {
+            otp[index+1].focus();
         }
-    });
+    })
 
-    input.addEventListener("keydown", (e) => {
-        if (e.key === "Backspace") {
-            if (input.value === "" && index > 0) {
-                inputs[index - 1].focus();
-            }
+    num.addEventListener("keydown", (event) => {
+        // console.log(event);
+        // console.log(event.target);
+        // console.log(event.target.value);
+        // console.log(event.key);
+        if(event.key === "Backspace" && index > 0) {
+            // console.log("This is a number", num.value);
+            num.value = "";
+            otp[index-1].focus();
         }
-    });
-
-});
+    })
+})
