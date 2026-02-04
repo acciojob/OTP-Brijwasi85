@@ -1,4 +1,4 @@
-
+//your JS code here. If required.
 const otp = document.querySelectorAll(".code");
 // console.log(otp);
 // console.log(otp[0]);
